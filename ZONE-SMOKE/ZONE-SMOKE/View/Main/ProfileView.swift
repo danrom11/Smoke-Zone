@@ -7,6 +7,10 @@
 
 import SwiftUI
 import Combine
+import CoreImage
+import CoreImage.CIFilterBuiltins
+
+import QRCode
 
 struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -21,29 +25,67 @@ struct ProfileView: View {
     @State private var textNotification = ""
     
     
+
+    
+    
     
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea(.all)
             VStack{
+                
                 HStack{
-                    Button(action: {
-                        print(connectUser.userProfile)
-                    }, label: {
-                        Image(systemName: "person")
-                            .font(.largeTitle)
-                            .frame(width: 65, height: 65)
-                            .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                            .overlay(RoundedRectangle(cornerRadius: 35).stroke(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .leading, endPoint: .trailing), lineWidth: 2))
-                    })
-                    
-                    Spacer()
-                    Text(connectUser.userProfile.id == -1 ? "Гость" : connectUser.userProfile.userName)
-                        .font(.system(size: 30))
-                        .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .trailing))
+                    Color.white
                 }
-                .padding()
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .leading, endPoint: .trailing), lineWidth: 3))
+                .frame(width: 25, height: 5)
+                .cornerRadius(35)
+                
+                HStack{
+                    FlashCard(front: {
+                        VStack{
+                            HStack{
+                                Text("Zona Dыма")
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.white)
+                                    .padding([.leading, .top])
+                                Spacer()
+                                
+                            }
+                            HStack{
+                                Text(connectUser.userProfile.id == -1 ? "Гость" : connectUser.userProfile.userName)
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.white)
+                                    .padding(.leading)
+                                Spacer()
+                            }
+                            Spacer()
+                            
+                            HStack{
+                                Text("Дыма: \(connectUser.userProfile.bonus)")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.white)
+                                    .padding()
+                                Spacer()
+                                
+                                Text("Cash Back: \(connectUser.userProfile.cashBack)%")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.white)
+                                    .padding()
+                            }
+                            
+                        }
+                    }, back: {
+                        VStack{
+                            if(connectUser.userProfile.id != -1){
+                                Image(uiImage: generationQrCode(from: "id: \(connectUser.userProfile.id)\nUser: \(connectUser.userProfile.userName)\nMail: \(connectUser.userProfile.mail)\nPhone: \(connectUser.userProfile.phone)\nBonus: \(connectUser.userProfile.bonus)\nCash Back: \(connectUser.userProfile.cashBack)"))
+                                    .resizable()
+                                    .interpolation(.none)
+                                    .scaledToFit()
+                            }
+                        }
+                        
+                    })
+                }
                 
                 if(connectUser.userProfile.id == -1){
                     Spacer()
@@ -126,7 +168,7 @@ struct ProfileView: View {
                     
                     Button(action: {
                         UserDefaults.standard.removeObject(forKey: "userMail")
-                        connectUser.userProfile = User(id: -1, mail: "null", phone: "null", userName: "null", bonus: 0)
+                        connectUser.userProfile = User(id: -1, mail: "null", phone: "null", userName: "null", bonus: 0, cashBack: 0)
                     }, label: {
                         Text("Выйти")
                             .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .trailing))
@@ -158,10 +200,71 @@ struct ProfileView: View {
             self.showHUD = false
         }
     }
+    
+    func generationQrCode(from string: String) -> UIImage{
+    
+        let doc1 = QRCode.Document(utf8String: string, errorCorrection: .low)
+        doc1.design.backgroundColor(UIColor.clear.cgColor)
+        doc1.design.shape.eye = QRCode.EyeShape.RoundedOuter()
+        doc1.design.shape.onPixels = QRCode.PixelShape.Circle()
+        doc1.design.style.onPixels = QRCode.FillStyle.Solid(UIColor.white.cgColor)
+        
+        // Generate a image for the QRCode
+        let cgImage = doc1.uiImage(CGSize(width: 150, height: 150))
+        
+        return cgImage ?? UIImage()
+    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
+    }
+}
+
+
+struct FlashCard<Front, Back>: View where Front: View, Back: View {
+    var front: () -> Front
+    var back: () -> Back
+    
+    @State var flipped: Bool = false
+    
+    @State var flashCardRotation = 0.0
+    @State var contentRoatation = 0.0
+    
+    init(@ViewBuilder front: @escaping () -> Front, @ViewBuilder back: @escaping () -> Back){
+        self.front = front
+        self.back = back
+    }
+    
+    var body: some View {
+        ZStack{
+            if flipped {
+                back()
+            } else {
+                front()
+            }
+        }.rotation3DEffect(.degrees(contentRoatation), axis: (x: 0, y: -1, z: 0))
+        .padding()
+        .frame(height: 200)
+        .frame(maxWidth: .infinity)
+        .background(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .topLeading, endPoint: .bottomTrailing))
+        .cornerRadius(35)
+        .padding()
+        .onTapGesture {
+            flipFlashCard()
+        }
+        .rotation3DEffect(.degrees(flashCardRotation), axis: (x: 0, y: -1, z: 0))
+    }
+    func flipFlashCard() {
+        let animationTime = 0.6
+        withAnimation(Animation.linear(duration: animationTime)){
+            flashCardRotation += 180
+        }
+        
+        withAnimation(Animation.linear(duration: 0.001).delay(animationTime / 2)){
+            contentRoatation += 180
+            flipped.toggle()
+        }
     }
 }

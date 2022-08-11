@@ -10,7 +10,7 @@ import Foundation
 class NetworkModel : ObservableObject {
     static let shared = NetworkModel()
     
-    @Published var userProfile : User = (User(id: -1, mail: "null", phone: "null", userName: "null", bonus: 0))
+    @Published var userProfile : User = (User(id: -1, mail: "null", phone: "null", userName: "null", bonus: 0, cashBack: 0))
     
     func Login(mail : String, phone : String){
         print(mail)

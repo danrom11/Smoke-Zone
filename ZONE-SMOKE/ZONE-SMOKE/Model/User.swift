@@ -13,4 +13,5 @@ struct User : Identifiable, Decodable {
     var phone : String
     var userName : String
     var bonus : Int
+    var cashBack : Int
 }

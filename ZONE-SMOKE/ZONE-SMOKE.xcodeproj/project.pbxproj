@@ -30,6 +30,7 @@
 		6895BF042860BF9E0017D315 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895BF032860BF9E0017D315 /* User.swift */; };
 		6895BF092860C4190017D315 /* PopularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895BF082860C4190017D315 /* PopularView.swift */; };
 		6895BF0B286125100017D315 /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895BF0A286125100017D315 /* NetworkModel.swift */; };
+		689FDE4C28A581AB0002CDEF /* QRCodeStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 689FDE4B28A581AB0002CDEF /* QRCodeStatic */; };
 		68A0A1492837845000AA3EBF /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A0A1482837845000AA3EBF /* News.swift */; };
 		68A0A14B283784D400AA3EBF /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A0A14A283784D400AA3EBF /* HomeModel.swift */; };
 		68A0A14D283785B600AA3EBF /* BlockNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A0A14C283785B600AA3EBF /* BlockNews.swift */; };
@@ -108,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				689FDE4C28A581AB0002CDEF /* QRCodeStatic in Frameworks */,
 				68161998287773420018034D /* iPhoneNumberField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +275,7 @@
 			name = "ZONE-SMOKE";
 			packageProductDependencies = (
 				68161997287773420018034D /* iPhoneNumberField */,
+				689FDE4B28A581AB0002CDEF /* QRCodeStatic */,
 			);
 			productName = "ZONE-SMOKE";
 			productReference = 680F508F28133FD200A1435D /* ZONE-SMOKE.app */;
@@ -304,6 +307,7 @@
 			mainGroup = 680F508628133FD200A1435D;
 			packageReferences = (
 				68161996287773420018034D /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
+				689FDE4A28A581AB0002CDEF /* XCRemoteSwiftPackageReference "QRCode" */,
 			);
 			productRefGroup = 680F509028133FD200A1435D /* Products */;
 			projectDirPath = "";
@@ -589,6 +593,14 @@
 				minimumVersion = 0.6.1;
 			};
 		};
+		689FDE4A28A581AB0002CDEF /* XCRemoteSwiftPackageReference "QRCode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dagronf/QRCode.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -596,6 +608,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 68161996287773420018034D /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
 			productName = iPhoneNumberField;
+		};
+		689FDE4B28A581AB0002CDEF /* QRCodeStatic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 689FDE4A28A581AB0002CDEF /* XCRemoteSwiftPackageReference "QRCode" */;
+			productName = QRCodeStatic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

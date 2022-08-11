@@ -17,6 +17,24 @@
         "revision" : "4ab804c31e095fa2372aa81baba4a855c8d9cf59",
         "version" : "3.4.2"
       }
+    },
+    {
+      "identity" : "qrcode",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/QRCode.git",
+      "state" : {
+        "revision" : "fb170ab74523e4af4b9aea60a637d5d9f8fcb90b",
+        "version" : "6.0.2"
+      }
+    },
+    {
+      "identity" : "swift-qrcode-generator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/swift-qrcode-generator",
+      "state" : {
+        "revision" : "5ca09b6a2ad190f94aa3d6ddef45b187f8c0343b",
+        "version" : "1.0.3"
+      }
     }
   ],
   "version" : 2
