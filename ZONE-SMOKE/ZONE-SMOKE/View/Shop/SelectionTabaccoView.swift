@@ -50,7 +50,7 @@ struct SelectionTabaccoView: View {
                 
                 Spacer()
             }//.padding(.top, 50)
-            ButtonReady()
+            ButtonReadyFilter()
         }.edgesIgnoringSafeArea(.bottom)
         
     }

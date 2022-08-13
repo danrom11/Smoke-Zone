@@ -26,6 +26,12 @@
 		687284002853D50800769FF4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687283FF2853D50800769FF4 /* ProfileView.swift */; };
 		68737200285D1686004EB112 /* ProductFoodAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687371FF285D1685004EB112 /* ProductFoodAdd.swift */; };
 		68789ECC2878D24A00C446CA /* NotificationHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68789ECB2878D24A00C446CA /* NotificationHUD.swift */; };
+		6886858F28A6A94B00C0746E /* HookahTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6886858E28A6A94B00C0746E /* HookahTableView.swift */; };
+		6886859128A6D70200C0746E /* HookahTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6886859028A6D70200C0746E /* HookahTypeView.swift */; };
+		6886859328A6D7F500C0746E /* CardElementHookahBowl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6886859228A6D7F500C0746E /* CardElementHookahBowl.swift */; };
+		6886859528A6E20200C0746E /* ElementHookah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6886859428A6E20200C0746E /* ElementHookah.swift */; };
+		6886859728A6E2D200C0746E /* HookahAssemblyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6886859628A6E2D200C0746E /* HookahAssemblyModel.swift */; };
+		6886859928A70D1800C0746E /* CradElementHookahFlask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6886859828A70D1800C0746E /* CradElementHookahFlask.swift */; };
 		6895BF02285FCDD10017D315 /* BuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895BF01285FCDD10017D315 /* BuyView.swift */; };
 		6895BF042860BF9E0017D315 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895BF032860BF9E0017D315 /* User.swift */; };
 		6895BF092860C4190017D315 /* PopularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895BF082860C4190017D315 /* PopularView.swift */; };
@@ -46,7 +52,7 @@
 		68B82E9428319AA50044E905 /* DetailsTobaccoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B82E9328319AA50044E905 /* DetailsTobaccoView.swift */; };
 		68BA0B9A283D02D0006730D9 /* FoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BA0B99283D02D0006730D9 /* FoodView.swift */; };
 		68D5180B282F0ED4004A0FAF /* SelectionTabaccoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D5180A282F0ED4004A0FAF /* SelectionTabaccoView.swift */; };
-		68D9ABF6285D00000011530D /* ButtonReady.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9ABF5285D00000011530D /* ButtonReady.swift */; };
+		68D9ABF6285D00000011530D /* ButtonReadyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9ABF5285D00000011530D /* ButtonReadyFilter.swift */; };
 		68E0D4DD2867D5F8001BDF1F /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E0D4D92867D5F8001BDF1F /* ImageCache.swift */; };
 		68E0D4DE2867D5F8001BDF1F /* EnvironmentValues+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E0D4DA2867D5F8001BDF1F /* EnvironmentValues+ImageCache.swift */; };
 		68E0D4DF2867D5F8001BDF1F /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E0D4DB2867D5F8001BDF1F /* AsyncImage.swift */; };
@@ -76,6 +82,12 @@
 		687283FF2853D50800769FF4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		687371FF285D1685004EB112 /* ProductFoodAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFoodAdd.swift; sourceTree = "<group>"; };
 		68789ECB2878D24A00C446CA /* NotificationHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHUD.swift; sourceTree = "<group>"; };
+		6886858E28A6A94B00C0746E /* HookahTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookahTableView.swift; sourceTree = "<group>"; };
+		6886859028A6D70200C0746E /* HookahTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookahTypeView.swift; sourceTree = "<group>"; };
+		6886859228A6D7F500C0746E /* CardElementHookahBowl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardElementHookahBowl.swift; sourceTree = "<group>"; };
+		6886859428A6E20200C0746E /* ElementHookah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementHookah.swift; sourceTree = "<group>"; };
+		6886859628A6E2D200C0746E /* HookahAssemblyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookahAssemblyModel.swift; sourceTree = "<group>"; };
+		6886859828A70D1800C0746E /* CradElementHookahFlask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CradElementHookahFlask.swift; sourceTree = "<group>"; };
 		6895BF01285FCDD10017D315 /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
 		6895BF032860BF9E0017D315 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6895BF082860C4190017D315 /* PopularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularView.swift; sourceTree = "<group>"; };
@@ -95,7 +107,7 @@
 		68B82E9328319AA50044E905 /* DetailsTobaccoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTobaccoView.swift; sourceTree = "<group>"; };
 		68BA0B99283D02D0006730D9 /* FoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodView.swift; sourceTree = "<group>"; };
 		68D5180A282F0ED4004A0FAF /* SelectionTabaccoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTabaccoView.swift; sourceTree = "<group>"; };
-		68D9ABF5285D00000011530D /* ButtonReady.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonReady.swift; sourceTree = "<group>"; };
+		68D9ABF5285D00000011530D /* ButtonReadyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonReadyFilter.swift; sourceTree = "<group>"; };
 		68E0D4D92867D5F8001BDF1F /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		68E0D4DA2867D5F8001BDF1F /* EnvironmentValues+ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+ImageCache.swift"; sourceTree = "<group>"; };
 		68E0D4DB2867D5F8001BDF1F /* AsyncImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
@@ -174,6 +186,7 @@
 				68A0A14E2837883500AA3EBF /* Popular.swift */,
 				6895BF032860BF9E0017D315 /* User.swift */,
 				68AE904D287F6E3B005FAD56 /* Music.swift */,
+				6886859428A6E20200C0746E /* ElementHookah.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -198,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				687283FD2853D02B00769FF4 /* MyPresetView.swift */,
+				6886858E28A6A94B00C0746E /* HookahTableView.swift */,
+				6886859028A6D70200C0746E /* HookahTypeView.swift */,
 				681D247428286BE80007CC92 /* HookahView.swift */,
 				68D5180A282F0ED4004A0FAF /* SelectionTabaccoView.swift */,
 				68B82E9328319AA50044E905 /* DetailsTobaccoView.swift */,
@@ -227,9 +242,11 @@
 				68B82E8F28316FA30044E905 /* ProductTobaccoAdd.swift */,
 				68B82E91283176010044E905 /* ProductTobaccoCart.swift */,
 				681F1C562836E06700436A3E /* ProductFilter.swift */,
-				68D9ABF5285D00000011530D /* ButtonReady.swift */,
+				68D9ABF5285D00000011530D /* ButtonReadyFilter.swift */,
 				687371FF285D1685004EB112 /* ProductFoodAdd.swift */,
 				686F8A43285F2E7800FC1067 /* ProductFoodCart.swift */,
+				6886859228A6D7F500C0746E /* CardElementHookahBowl.swift */,
+				6886859828A70D1800C0746E /* CradElementHookahFlask.swift */,
 			);
 			path = ContentView;
 			sourceTree = "<group>";
@@ -253,6 +270,7 @@
 				68A0A14A283784D400AA3EBF /* HomeModel.swift */,
 				6895BF0A286125100017D315 /* NetworkModel.swift */,
 				68AE904F287F6EE0005FAD56 /* MusicModel.swift */,
+				6886859628A6E2D200C0746E /* HookahAssemblyModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -341,6 +359,7 @@
 				680E8D112874DA290009CFE1 /* DetailsFoodView.swift in Sources */,
 				6895BF0B286125100017D315 /* NetworkModel.swift in Sources */,
 				680F50A72813400400A1435D /* LaunchScreen.swift in Sources */,
+				6886859728A6E2D200C0746E /* HookahAssemblyModel.swift in Sources */,
 				68A0A14B283784D400AA3EBF /* HomeModel.swift in Sources */,
 				68EA6B8028204F1C0099C11E /* Product.swift in Sources */,
 				68AE904E287F6E3B005FAD56 /* Music.swift in Sources */,
@@ -353,13 +372,17 @@
 				687284002853D50800769FF4 /* ProfileView.swift in Sources */,
 				68AE904C287F6686005FAD56 /* MusicBlock.swift in Sources */,
 				681F1C572836E06700436A3E /* ProductFilter.swift in Sources */,
+				6886859528A6E20200C0746E /* ElementHookah.swift in Sources */,
 				68737200285D1686004EB112 /* ProductFoodAdd.swift in Sources */,
 				68B82E9028316FA30044E905 /* ProductTobaccoAdd.swift in Sources */,
+				6886859928A70D1800C0746E /* CradElementHookahFlask.swift in Sources */,
 				68A0A151283788CD00AA3EBF /* BlockPopular.swift in Sources */,
+				6886858F28A6A94B00C0746E /* HookahTableView.swift in Sources */,
 				680F50A92813400400A1435D /* BottomTabView.swift in Sources */,
-				68D9ABF6285D00000011530D /* ButtonReady.swift in Sources */,
+				68D9ABF6285D00000011530D /* ButtonReadyFilter.swift in Sources */,
 				6895BF092860C4190017D315 /* PopularView.swift in Sources */,
 				68AE904A287F3DA3005FAD56 /* MusicView.swift in Sources */,
+				6886859328A6D7F500C0746E /* CardElementHookahBowl.swift in Sources */,
 				68B82E92283176010044E905 /* ProductTobaccoCart.swift in Sources */,
 				68E0D4DF2867D5F8001BDF1F /* AsyncImage.swift in Sources */,
 				680F50A82813400400A1435D /* TopTabView.swift in Sources */,
@@ -372,6 +395,7 @@
 				687283FE2853D02B00769FF4 /* MyPresetView.swift in Sources */,
 				681D247528286BE80007CC92 /* HookahView.swift in Sources */,
 				680F50AA2813400400A1435D /* HomeView.swift in Sources */,
+				6886859128A6D70200C0746E /* HookahTypeView.swift in Sources */,
 				68B82E9428319AA50044E905 /* DetailsTobaccoView.swift in Sources */,
 				68A0A1492837845000AA3EBF /* News.swift in Sources */,
 				681F1C592837671F00436A3E /* Filter.swift in Sources */,

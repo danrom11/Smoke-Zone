@@ -8,42 +8,46 @@
 import SwiftUI
 
 struct MyPresetView: View {
-    
-    @State private var showHookahView = false
+
     
     var body: some View {
-        ZStack{
-            Color.black
-            VStack{
-                HStack{
-                    Text("Готовые сборки")
-                        .font(.system(size: 32))
-                        .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                        .padding(.top, 40)
-                        .padding(.leading)
+        NavigationView{
+            ZStack{
+                Color.black
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack{
+                    ZStack{
+                        HStack{
+                            Text("Готовые сборки")
+                                .font(.system(size: 32))
+                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    }
+                    
+                    
+                    //TODO::LIST Preset
+                    
+                    HStack{
+                        NavigationLink(destination: HookahTableView(), label: {
+                            Image(systemName: "plus.circle")
+                                .font(.system(size: 40, weight: .light))
+                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.cyan, .indigo]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                        }).isDetailLink(false)
+                        
+                    }
+                    .padding()
+                    
                     Spacer()
                 }
-                
-                //TODO::LIST Preset
-                
-                HStack{
-                    Button(action: {
-                        self.showHookahView.toggle()
-                    }, label: {
-                        Image(systemName: "plus.circle")
-                            .font(.system(size: 40, weight: .light))
-                            .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.cyan, .indigo]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                    })
-                    
-                }
-                .fullScreenCover(isPresented: $showHookahView){
-                    HookahView()
-                }
-                .padding()
-                
-                Spacer()
-            }
-        }.ignoresSafeArea(.all)
+            }.edgesIgnoringSafeArea(.bottom)
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+                .navigationViewStyle(StackNavigationViewStyle())
+        }
+       
     }
 }
 

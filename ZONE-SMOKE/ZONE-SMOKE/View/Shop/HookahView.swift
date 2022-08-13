@@ -15,26 +15,28 @@ struct HookahView: View {
     var body: some View {
         ZStack{
             Color.black
-                .edgesIgnoringSafeArea(.top)
+                .edgesIgnoringSafeArea(.all)
             VStack{
                 
                 HStack{
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.backward")
+                    ZStack{
+                        HStack{
+                            Button(action: {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }, label: {
+                                Image(systemName: "chevron.backward")
+                                    .font(.system(size: 32))
+                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                                    //.padding(.top, 40)
+                                    .padding(.leading)
+                            })
+                            Spacer()
+                        }
+                        Text("Табак")
                             .font(.system(size: 32))
                             .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                            //.padding(.top, 40)
-                            .padding(.leading)
-                    })
-                    
-                    Text("Табак")
-                        .font(.system(size: 32))
-                        .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                        //.padding(.top, 40)
-                        .padding(.leading)
-                    Spacer()
+                            //.padding(.leading)
+                    }
                 }
         
                 List{
@@ -81,8 +83,11 @@ struct HookahView: View {
                 ButtonNext()
                     .padding(.bottom, 10)
             }
-
+            
+              
+                
         }.edgesIgnoringSafeArea(.bottom)
+            .navigationBarHidden(true)
         
         
         
