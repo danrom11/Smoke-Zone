@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import iPhoneNumberField
+import PopupView
 
 struct ProfileLoginView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -20,8 +21,9 @@ struct ProfileLoginView: View {
     
     @State private var showCodeTextField = false
     
-    @State private var textNotification = ""
     @State private var showHUD = false
+    @State private var textNotification = "Неверный код"
+
     
     
     
@@ -83,7 +85,6 @@ struct ProfileLoginView: View {
                         } else {
                             self.textNotification = "Заполните все поля"
                             self.showHUD.toggle()
-                            dismissHUD()
                         }
                     }, label: {
                         Text("Отправить")
@@ -115,7 +116,6 @@ struct ProfileLoginView: View {
                         } else {
                             self.textNotification = "Неверный код"
                             self.showHUD.toggle()
-                            dismissHUD()
                         }
                     }, label: {
                         Text("Войти")
@@ -129,21 +129,27 @@ struct ProfileLoginView: View {
                 
                 Spacer()
             }
-            NotificationHUD(textNotification: textNotification)
-                .offset(y: showHUD ? 0 : -200)
-                .animation(.spring(), value: UUID())
+            .popup(isPresented: $showHUD, type: .default, position: .top, autohideIn: 2.0, dragToDismiss: true){
+                ZStack{
+                    VStack{
+                        HStack{
+                            Text(textNotification)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .leading, endPoint: .trailing))
+                                .cornerRadius(35)
+                                .shadow(color: .teal, radius: 5, x: 0, y: 4)
+                        }.padding(.top, 40)
+                        Spacer()
+                    }
+                }
+            }
         }
     }
     func limitText(_ upper: Int) {
             if code.count > upper {
                 code = String(code.prefix(upper))
             }
-    }
-    
-    func dismissHUD(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-            self.showHUD = false
-        }
     }
 }
 

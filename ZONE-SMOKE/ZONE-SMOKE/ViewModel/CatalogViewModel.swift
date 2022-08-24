@@ -47,9 +47,11 @@ class CatalogViewModel : ObservableObject{
     func serchIndex(product : Product, array : [Product]) -> Int{
         for item in 0..<array.count{
             if array[item].id == product.id{
+                print("ITEM -> \(item)")
                 return item
             }
         }
+        print("ERROR!")
         fatalError("Index not found in cart")
     }
     

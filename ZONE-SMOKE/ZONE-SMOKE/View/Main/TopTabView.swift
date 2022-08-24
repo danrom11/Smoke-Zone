@@ -10,6 +10,11 @@ import SwiftUI
 struct TopTabView: View {
     
     @State var showProfile = false
+    @State var showPhotoPicker = false
+    
+    @State var avatarImage = UIImage()
+    @State var selectedAvatar : Int
+    
     @ObservedObject var connectUser = NetworkModel.shared
     
     var body: some View {
@@ -24,7 +29,7 @@ struct TopTabView: View {
                             .padding(.trailing)
                             .padding(.top)
                             .padding(.bottom, 3)
-                      Spacer()
+                        Spacer()
                     }
                     HStack{
                         Image(systemName: "smoke")
@@ -33,39 +38,69 @@ struct TopTabView: View {
                         Text("Дыма: \(connectUser.userProfile.bonus)")
                             .foregroundColor(.white)
                             .font(.title2)
-                            Spacer()
+                        Spacer()
                     }
                     .padding(.leading)
                     .padding(.bottom)
                     
                 }
-               Spacer()
-                HStack{
-                    Button(action: {
-                        self.showProfile.toggle()
-                    }, label: {
-                        Image(systemName: "person")
-                            .font(.largeTitle)
-                            .frame(width: 65, height: 65)
-                            .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                Spacer()
+                ZStack(alignment: .bottomTrailing){
+                    HStack{
+                        Button(action: {
+                            self.showProfile.toggle()
+                        }, label: {
+                            if(connectUser.selectedAvatar == 0){
+                                Image(systemName: "person")
+                                    .font(.system(size: 32))
+                                    .frame(width: 65, height: 65)
+                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            } else {
+                                Image(uiImage: connectUser.userAvatar)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 65, height: 65)
+                                    .clipShape(Circle())
+                            }
+                            
+                        })
+                        
+                        
+                    }
+                    .background(.white)
+                    .clipShape(Circle())
+                    .padding(.trailing)
+                    .sheet(isPresented: $showProfile){
+                        ProfileView()
+                            .preferredColorScheme(.dark)
+                    }
+                    
+                    HStack{
+                        Button(action: {
+                            showPhotoPicker.toggle()
+                        }, label: {
+                            
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(.teal)
+                                .font(.system(size: 16))
+                                .padding(.trailing)
+                            
+                            
+                        })
+                    }.sheet(isPresented: $showPhotoPicker, content: {
+                        PhotoPicker()
+                            .ignoresSafeArea(.all)
                     })
                     
-                    
-                }
-                .background(.white)
-                .clipShape(Circle())
-                .padding()
-                .sheet(isPresented: $showProfile){
-                    ProfileView()
                 }
                 
             }
             .background(LinearGradient(gradient: Gradient(colors: [.teal, .purple]), startPoint: .leading, endPoint: .trailing))
-            //.clipShape(Capsule())
             .cornerRadius(35)
             .padding()
             .padding(.top, 25)
             Spacer()
+            
         }.edgesIgnoringSafeArea(.all)
         
     }
@@ -73,6 +108,6 @@ struct TopTabView: View {
 
 struct TopTAB_Previews: PreviewProvider {
     static var previews: some View {
-        TopTabView()
+        TopTabView(selectedAvatar: 0)
     }
 }

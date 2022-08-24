@@ -11,9 +11,12 @@ import SwiftUI
 
 struct HookahTypeView: View {
     
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var activateRootLink : Bool
     
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var connectElementsHookah = HookahAssemblyModel.shared
+    
+    @Binding var IDReadyHookah : Int
     
     var body: some View {
         ZStack{
@@ -42,7 +45,7 @@ struct HookahTypeView: View {
                 
                 VStack{
                     HStack{
-                        Text("Чаша:")
+                        Text("Чаша: \(connectElementsHookah.selectedBowl.id != -1 ? connectElementsHookah.selectedBowl.text : "")")
                             .font(.system(size: 30))
                             .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
                             .padding([.leading, .top])
@@ -60,7 +63,7 @@ struct HookahTypeView: View {
                     }).preferredColorScheme(.dark)
                     
                     HStack{
-                        Text("Колба:")
+                        Text("Колба: \(connectElementsHookah.selectedFlask.id != -1 ? connectElementsHookah.selectedFlask.text : "")")
                             .font(.system(size: 30))
                             .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
                             .padding([.leading, .top])
@@ -82,22 +85,29 @@ struct HookahTypeView: View {
                 
                 Spacer()
                 
-                if(connectElementsHookah.selectedBowl.id != -1 && connectElementsHookah.selectedFlask.id != -1){
-                    HStack{
-                        NavigationLink(destination: HookahView(), label: {
-                            Text("Дальше")
-                                .foregroundColor(.white)
-                                .font(.system(size: 30))
-                        }).isDetailLink(false)
-                    }
-                    .frame(width: 180, height: 80)
-                    .background(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(35)
-                    .padding()
-                }
+                
                 
             }
             
+            if(connectElementsHookah.selectedBowl.id != -1 && connectElementsHookah.selectedFlask.id != -1){
+                ZStack{
+                    VStack{
+                        Spacer()
+                        HStack{
+                            NavigationLink(destination: HookahView(activateRootLink: $activateRootLink, IDReadyHookah: $IDReadyHookah), label: {
+                                Text("Дальше")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 30))
+                            }).isDetailLink(false)
+                        }
+                        .frame(width: 180, height: 80)
+                        .background(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .leading, endPoint: .trailing))
+                        .cornerRadius(35)
+                        .padding()
+                    }
+                }
+                
+            }
          
         }.edgesIgnoringSafeArea(.bottom)
             .navigationBarHidden(true)
@@ -108,6 +118,6 @@ struct HookahTypeView: View {
 
 struct HookahTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        HookahTypeView()
+        HookahTypeView(activateRootLink: .constant(false), IDReadyHookah: .constant(-1))
     }
 }

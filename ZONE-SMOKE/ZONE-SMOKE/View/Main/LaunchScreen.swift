@@ -14,6 +14,7 @@ struct LaunchScreen: View {
     
     @State private var CheckMail = UserDefaults.standard.string(forKey: "userMail")
     
+    
     var body: some View {
         ZStack{
             Color.black
@@ -45,6 +46,7 @@ struct LaunchScreen: View {
             }
         }.onAppear(){
             NetworkModel.shared.getInfoUser(mail: CheckMail ?? "null")
+            NetworkModel.shared.loadUserAvatar()
             NetworkModel.shared.getProductTabacco()
             NetworkModel.shared.getProductFood()
         }

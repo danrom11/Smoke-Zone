@@ -11,7 +11,7 @@ class HookahAssemblyModel : ObservableObject {
     static var shared = HookahAssemblyModel()
     
     @Published var bowls = [
-        ElementHookah(id: 0, image: "hookahStandart", text: "На чаше", typeObject: "standart"),
+        ElementHookah(id: 0, image: "hookahStandart", text: "Обычная", typeObject: "standart"),
         ElementHookah(id: 1, image: "hookahOrange", text: "На апельсине", typeObject: "orange"),
         ElementHookah(id: 2, image: "hookahPineapple", text: "На ананасе", typeObject: "pineapple"),
         ElementHookah(id: 3, image: "hookahGrapefruit", text: "На грейпфрукте", typeObject: "grapefruit")
@@ -25,5 +25,20 @@ class HookahAssemblyModel : ObservableObject {
         ElementHookah(id: 3, image: "InBotleAlcohol", text: "На алкоголе", typeObject: "alcohol")
     ]
     @Published var selectedFlask = ElementHookah(id: -1, image: "null", text: "null", typeObject: "null")
+    
+    @Published var hookahs = [Hookah]()
+    
+    func removeHookah(hookah : Hookah){
+        for item in 0..<hookahs.count{
+            if(hookah.id == hookahs[item].id){
+                hookahs.remove(at: item)
+                break
+            }
+        }
+    }
+    
+    @Published var myHookahAssembly = [HookahAssembly]()
+    
+    
     
 }

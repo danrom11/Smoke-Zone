@@ -11,6 +11,7 @@ import CoreImage
 import CoreImage.CIFilterBuiltins
 
 import QRCode
+import PopupView
 
 struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -128,7 +129,7 @@ struct ProfileView: View {
                                     } else {
                                         self.textNotification = "Имя пользователя пустое"
                                         self.showHUD.toggle()
-                                        dismissHUD()
+                                        //dismissHUD()
                                         connectUser.userProfile.userName = lastUserName
                                     }
                                     
@@ -168,6 +169,7 @@ struct ProfileView: View {
                     
                     Button(action: {
                         UserDefaults.standard.removeObject(forKey: "userMail")
+                        UserDefaults.standard.removeObject(forKey: "userAvatar")
                         connectUser.userProfile = User(id: -1, mail: "null", phone: "null", userName: "null", bonus: 0, cashBack: 0)
                     }, label: {
                         Text("Выйти")
@@ -183,9 +185,21 @@ struct ProfileView: View {
                 
                 Spacer()
             }.padding(.top).padding(.horizontal, 5)
-            NotificationHUD(textNotification: textNotification)
-                .offset(y: showHUD ? 0 : -200)
-                .animation(.spring(), value: UUID())
+                .popup(isPresented: $showHUD, type: .default, position: .top, autohideIn: 2.0, dragToDismiss: true){
+                    ZStack{
+                        VStack{
+                            HStack{
+                                Text(textNotification)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .leading, endPoint: .trailing))
+                                    .cornerRadius(35)
+                                    .shadow(color: .teal, radius: 5, x: 0, y: 4)
+                            }.padding(.top, 40)
+                            Spacer()
+                        }
+                    }
+                }
         }
     }
     
@@ -193,12 +207,6 @@ struct ProfileView: View {
         if connectUser.userProfile.userName.count > upper {
             connectUser.userProfile.userName = String(connectUser.userProfile.userName.prefix(upper))
             }
-    }
-    
-    func dismissHUD(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-            self.showHUD = false
-        }
     }
     
     func generationQrCode(from string: String) -> UIImage{

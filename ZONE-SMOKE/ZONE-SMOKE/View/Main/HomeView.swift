@@ -11,6 +11,7 @@ struct HomeView: View {
     var body: some View {
         
         ZStack{
+           // Color.black.edgesIgnoringSafeArea(.all)
            // Image("backSmoke")
              //   .resizable()
                // //.scaledToFill()
@@ -46,7 +47,7 @@ struct HomeView: View {
                         }
                         
                     }).padding(.top)
-                    TopTabView()
+                    TopTabView(selectedAvatar: 0)
                 }
                     
                // Spacer()

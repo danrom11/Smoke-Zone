@@ -11,7 +11,7 @@ struct MyPresetView: View {
 
     
     var body: some View {
-        NavigationView{
+       // NavigationView{
             ZStack{
                 Color.black
                     .edgesIgnoringSafeArea(.all)
@@ -29,26 +29,32 @@ struct MyPresetView: View {
                     
                     
                     //TODO::LIST Preset
-                    
-                    HStack{
-                        NavigationLink(destination: HookahTableView(), label: {
-                            Image(systemName: "plus.circle")
-                                .font(.system(size: 40, weight: .light))
-                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.cyan, .indigo]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                        }).isDetailLink(false)
+                    ScrollView(.vertical, showsIndicators: true, content: {
                         
-                    }
-                    .padding()
+                        
+                        
+                        HStack{
+                            NavigationLink(destination: HookahTableView(), label: {
+                                Image(systemName: "plus.circle")
+                                    .font(.system(size: 40, weight: .light))
+                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.cyan, .indigo]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            }).isDetailLink(false)
+                            
+                        }
+                        .padding()
+                    })
+                    
+                    
                     
                     Spacer()
                 }
             }.edgesIgnoringSafeArea(.bottom)
                 .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
-                .navigationViewStyle(StackNavigationViewStyle())
+//                .navigationBarBackButtonHidden(true)
+//                .navigationViewStyle(StackNavigationViewStyle())
         }
        
-    }
+    //}
 }
 
 struct MyPresetView_Previews: PreviewProvider {
