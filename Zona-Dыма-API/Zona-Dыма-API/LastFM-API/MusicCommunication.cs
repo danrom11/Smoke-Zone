@@ -24,6 +24,7 @@ namespace Zona_Dыма_API.LastFMAPI
         {
             List<Music> musics = new List<Music>();
             WebClient webClient = new WebClient();
+            Console.WriteLine("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + term + "&api_key=c6cc0ff75b0eb1829a247430ed2509ed&format=json&limit=" + limit);
             var load = webClient.DownloadString("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + term + "&api_key=c6cc0ff75b0eb1829a247430ed2509ed&format=json&limit=" + limit);
             var resultJson = JObject.Parse(load);
 

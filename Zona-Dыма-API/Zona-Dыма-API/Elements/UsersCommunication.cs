@@ -5,10 +5,10 @@ using MySqlConnector;
 
 namespace Zona_Dыма_API.Elements
 {
-	public static class UsersCommunication
+	public class UsersCommunication
 	{
-        static readonly DB db = new DB();
-		public static string AddUser(string userName, string mail, string phone)
+        DB db = new DB();
+		public string AddUser(string userName, string mail, string phone)
         {
 			MySqlCommand command = new MySqlCommand("INSERT INTO `Users` (`id`, `mail`, `phone`, `userName`, `bonus`, `cashBack`) VALUES (NULL, @MAIL, @PHONE, @USERNAME, @BONUS, @CASHBACK)", db.getConnection());
 
@@ -35,7 +35,7 @@ namespace Zona_Dыма_API.Elements
 			}
         }
 
-		public static User InfoUser(string mail)
+		public User InfoUser(string mail)
         {
 			MySqlCommand command = new MySqlCommand("SELECT * FROM `Users`", db.getConnection());
 
@@ -62,7 +62,7 @@ namespace Zona_Dыма_API.Elements
 		}
 
 
-		public static User Login(string mail, string phone)
+		public User Login(string mail, string phone)
         {
 			User user = InfoUser(mail);
 			if (user.id != -1)
@@ -71,7 +71,7 @@ namespace Zona_Dыма_API.Elements
 			return InfoUser(mail);
         }
 
-		public static async void SendMail(string mail, string code)
+		public async void SendMail(string mail, string code)
         {
 			MailAddress from = new MailAddress("Epifanov.den03@mail.ru", "Zona Dыма");
 			MailAddress to = new MailAddress(mail);
@@ -84,7 +84,7 @@ namespace Zona_Dыма_API.Elements
 			await smtp.SendMailAsync(m);
 		}
 
-		public static User SetBonus(string mail, int bonus)
+		public User SetBonus(string mail, int bonus)
         {
 			MySqlCommand command = new MySqlCommand("UPDATE `Users` SET `bonus` = @BONUS WHERE `Users`.`mail` = @MAIL", db.getConnection());
 			command.Parameters.Add("@MAIL", MySqlDbType.VarChar).Value = mail;
@@ -104,7 +104,7 @@ namespace Zona_Dыма_API.Elements
 			}
 		}
 
-		public static User SetUserName(string mail, string userName)
+		public User SetUserName(string mail, string userName)
         {
 			MySqlCommand command = new MySqlCommand("UPDATE `Users` SET `userName` = @USERNAME WHERE `Users`.`mail` = @MAIL", db.getConnection());
 			command.Parameters.Add("@MAIL", MySqlDbType.VarChar).Value = mail;
