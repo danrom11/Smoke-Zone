@@ -62,6 +62,12 @@ namespace Zona_Dыма_API.Controllers
             return JsonSerializer.Serialize(new ProductsCommunication().GetProducts(type), new JsonSerializerOptions { WriteIndented = true });
         }
 
+        [HttpGet("/Zona_Smoke_API/GetFilters")]
+        public string GetFilters(string type)
+        {
+            return JsonSerializer.Serialize(new FilterCommunication().GetProducts(type), new JsonSerializerOptions { WriteIndented = true });
+        }
+
         [HttpGet("/Zona_Smoke_API/SetBonus")]
         public string SetBonus(string mail, int bonus)
         {
