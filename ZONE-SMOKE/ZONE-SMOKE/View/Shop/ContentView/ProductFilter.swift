@@ -40,6 +40,6 @@ struct ProductFilter: View {
 
 struct ProductFilter_Previews: PreviewProvider {
     static var previews: some View {
-        ProductFilter(filter: Filter(title: "DarkSide (Core)"))
+        ProductFilter(filter: Filter(id: 1, title: "DarkSide (Core)"))
     }
 }

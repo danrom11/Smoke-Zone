@@ -68,10 +68,6 @@ struct HomeView: View {
 
 
 
-
-
-
-
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()

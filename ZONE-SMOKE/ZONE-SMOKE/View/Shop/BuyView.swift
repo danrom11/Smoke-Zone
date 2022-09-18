@@ -9,11 +9,13 @@ import SwiftUI
 
 struct BuyView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var activeRootLink : Bool
+    
     @ObservedObject var sh = CatalogViewModel.shared
+    @ObservedObject var connectHookah = HookahAssemblyModel.shared
+    
     @State private var date = Date()
     
-    
-    @State private var showRedy = false
     @State private var showLogin = false
     
     @State private var bonusCheck = false
@@ -28,26 +30,28 @@ struct BuyView: View {
                 .edgesIgnoringSafeArea(.top)
             VStack{
                 HStack{
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.backward")
+                    ZStack{
+                        HStack{
+                            Button(action: {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }, label: {
+                                Image(systemName: "chevron.backward")
+                                    .font(.system(size: 32))
+                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                                    //.padding(.top, 40)
+                                    .padding(.leading)
+                            })
+                            Spacer()
+                        }
+                        Text("Оформление")
                             .font(.system(size: 32))
                             .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                           // .padding(.top, 40)
-                            .padding(.leading)
-                    })
-                    
-                    Text("Оформление")
-                        .font(.system(size: 32))
-                        .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                        //.padding(.top, 40)
-                        .padding(.leading)
-                    Spacer()
+                            //.padding(.leading)
+                    }
                 }
                 if(connectUser.userProfile.id != -1){
                     HStack{
-                        Text(bonusCheck ? "Ваш заказ на \((sh.priceFood() + 550 - Decimal(selectedBonus)).formatted()) ₽ : " : "Ваш заказ на \((sh.priceFood() + 550).formatted()) ₽ :")
+                        Text(bonusCheck ? "Ваш заказ на \((sh.priceFood() + connectHookah.getPriceHookahs() - Decimal(selectedBonus)).formatted()) ₽ : " : "Ваш заказ на \((sh.priceFood() + connectHookah.getPriceHookahs()).formatted()) ₽ :")
                             .font(.system(size: 25))
                             .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
                             
@@ -70,10 +74,13 @@ struct BuyView: View {
                     HStack{
                         ScrollView(.vertical){
                             VStack(alignment: .leading){
-                                Text("Кальян - 550 ₽")
-                                    .font(.system(size: 20))
-                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                                    .padding(.bottom, 5)
+                                ForEach(connectHookah.hookahs){item in
+                                    Text("Кальян \(item.title) - \((item.bowl.price + item.flask.price).formatted()) ₽")
+                                        .font(.system(size: 20))
+                                        .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                                        .padding(.bottom, 5)
+                                }
+                                
                                 ForEach(CatalogViewModel.shared.cartFood){item in
                                     Text("\(item.title) кол. \(item.count) - \((item.price * Decimal(item.count)).formatted()) ₽")
                                         .font(.system(size: 20))
@@ -107,22 +114,24 @@ struct BuyView: View {
                     Text("Забронировать на:")
                         .font(.system(size: 25))
                         .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                    DatePicker("Время", selection: $date, in: Date()...)
+                    DatePicker("Время", selection: $date, in: Date()..., displayedComponents: [.date, .hourAndMinute])
+                        .environment(\.locale, Locale.init(identifier: "ru"))
+                        .labelsHidden()
+                        //.datePickerStyle(.wheel)
                         .padding()
                         .background(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(35)
                         .foregroundColor(.white)
                         .tint(.white)
+                        //.id(date)
                     HStack{
-                        Button(action: {
-                            self.showRedy.toggle()
-                        }, label: {
+                        
+                        NavigationLink(destination: {BookingView(activeRootLink: $activeRootLink, date: date)}, label: {
                             Text("Готово")
                                 .foregroundColor(.white)
                                 .font(.system(size: 30))
-                        }).fullScreenCover(isPresented: $showRedy){
-                            BottomTabView()
-                        }
+                        }).isDetailLink(false)
+                        
                     }
                     .frame(width: 180, height: 80)
                     .background(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .leading, endPoint: .trailing))
@@ -135,6 +144,9 @@ struct BuyView: View {
                         .padding()
                     Spacer()
                     HStack{
+                        
+                        
+                        
                         Button(action: {
                             self.showLogin.toggle()
                         }, label: {
@@ -156,11 +168,12 @@ struct BuyView: View {
                 Spacer()
             }
         }.edgesIgnoringSafeArea(.bottom)
+            .navigationBarHidden(true)
     }
 }
 
 struct BuyView_Previews: PreviewProvider {
     static var previews: some View {
-        BuyView()
+        BuyView(activeRootLink: .constant(false))
     }
 }

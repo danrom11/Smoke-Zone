@@ -22,13 +22,24 @@ struct TopTabView: View {
             HStack{
                 VStack{
                     HStack{
-                        Text("ZОНА-DЫМА")
+                        
+                        Text(connectUser.userProfile.id != -1 ? connectUser.userProfile.userName : "Войдите в профиль")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
                             .foregroundColor(.white)
                             .font(.title)
                             .padding(.leading)
                             .padding(.trailing)
                             .padding(.top)
                             .padding(.bottom, 3)
+                        
+//                        Text("ZОНА-DЫМА")
+//                            .foregroundColor(.white)
+//                            .font(.title)
+//                            .padding(.leading)
+//                            .padding(.trailing)
+//                            .padding(.top)
+//                            .padding(.bottom, 3)
                         Spacer()
                     }
                     HStack{

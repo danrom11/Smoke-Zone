@@ -23,10 +23,11 @@ class NetworkModel : ObservableObject {
             selectedAvatar = 1
     }
     
+    
     func Login(mail : String, phone : String){
         print(mail)
         print(phone)
-        guard let url = URL(string: "http://localhost:5001/Zona_Smoke_API/Login?mail=\(mail)&phone=\(phone.replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B"))") else {return print("ERROR")}
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/Login?mail=\(mail)&phone=\(phone.replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B"))") else {return print("ERROR")}
 
         let urlRequest = URLRequest(url: url)
 
@@ -57,7 +58,7 @@ class NetworkModel : ObservableObject {
     
     func getInfoUser(mail : String) {
         print(mail)
-        guard let url = URL(string: "http://localhost:5001/Zona_Smoke_API/GetInfoUser?mail=\(mail)") else {return print("ERROR")}
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/GetInfoUser?mail=\(mail)") else {return print("ERROR")}
 
         let urlRequest = URLRequest(url: url)
 
@@ -86,8 +87,38 @@ class NetworkModel : ObservableObject {
         dataTask.resume()
     }
     
+    func getFiltersTabacco(){
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/GetFilters?type=Tabacco") else {return print("ERROR")}
+
+        let urlRequest = URLRequest(url: url)
+
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            guard let response = response as? HTTPURLResponse else { return }
+
+            if response.statusCode == 200 {
+                guard let data = data else { return }
+                print("DATA = \(data)")
+                DispatchQueue.main.async {
+                    do {
+                        let decodedFiltersTabacco = try JSONDecoder().decode([Filter].self, from: data)
+                        FilterModel.shared.tabaccoFilters = decodedFiltersTabacco
+                       
+                    } catch let error {
+                        print("Error decoding: ", error)
+                    }
+                }
+            } else { print("ERRR")}
+        }
+
+        dataTask.resume()
+    }
+    
     func getProductTabacco() {
-        guard let url = URL(string: "http://localhost:5001/Zona_Smoke_API/GetProducts?type=ProductsTabacco") else {return print("ERROR")}
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/GetProducts?type=ProductsTabacco") else {return print("ERROR")}
 
         let urlRequest = URLRequest(url: url)
 
@@ -116,8 +147,38 @@ class NetworkModel : ObservableObject {
         dataTask.resume()
     }
     
+    func getFiltersFood(){
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/GetFilters?type=Food") else {return print("ERROR")}
+
+        let urlRequest = URLRequest(url: url)
+
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            guard let response = response as? HTTPURLResponse else { return }
+
+            if response.statusCode == 200 {
+                guard let data = data else { return }
+                print("DATA = \(data)")
+                DispatchQueue.main.async {
+                    do {
+                        let decodedFiltersFood = try JSONDecoder().decode([Filter].self, from: data)
+                        FilterModel.shared.foodFilters = decodedFiltersFood
+                       
+                    } catch let error {
+                        print("Error decoding: ", error)
+                    }
+                }
+            } else { print("ERRR")}
+        }
+
+        dataTask.resume()
+    }
+    
     func getProductFood() {
-        guard let url = URL(string: "http://localhost:5001/Zona_Smoke_API/GetProducts?type=ProductsFood") else {return print("ERROR")}
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/GetProducts?type=ProductsFood") else {return print("ERROR")}
 
         let urlRequest = URLRequest(url: url)
 
@@ -146,8 +207,38 @@ class NetworkModel : ObservableObject {
         dataTask.resume()
     }
     
+    func getTabelBookings(){
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/GetTableBookings") else {return print("ERROR")}
+
+        let urlRequest = URLRequest(url: url)
+
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            guard let response = response as? HTTPURLResponse else { return }
+
+            if response.statusCode == 200 {
+                guard let data = data else { return }
+                print("DATA = \(data)")
+                DispatchQueue.main.async {
+                    do {
+                        let decodedTableBookings = try JSONDecoder().decode([Booking].self, from: data)
+                        BookingModel.shared.tables = decodedTableBookings
+                       
+                    } catch let error {
+                        print("Error decoding: ", error)
+                    }
+                }
+            } else { print("ERRR")}
+        }
+
+        dataTask.resume()
+    }
+    
     func sendCode(mail : String, code : String){
-        let url = URL(string: "http://localhost:5001/Zona_Smoke_API/SendCode?mail=\(mail)&code=\(code)")!
+        let url = URL(string: "https://smokezone.site/Zona_Smoke_API/SendCode?mail=\(mail)&code=\(code)")!
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
@@ -160,7 +251,7 @@ class NetworkModel : ObservableObject {
     
     func SetUserName(mail : String, userName : String) {
         print(mail)
-        guard let url = URL(string: "http://localhost:5001/Zona_Smoke_API/SetUserName?mail=\(mail)&userName=\(userName.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)") else {return print("ERROR")}
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/SetUserName?mail=\(mail)&userName=\(userName.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)") else {return print("ERROR")}
 
         let urlRequest = URLRequest(url: url)
 
@@ -191,7 +282,7 @@ class NetworkModel : ObservableObject {
     
     
     func getMusics(term : String) {
-        guard let url = URL(string: "http://localhost:5001/Zona_Smoke_API/NewTestLastFM?term=\(term.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)&limit=10") else {return print("ERROR")}
+        guard let url = URL(string: "https://smokezone.site/Zona_Smoke_API/NewTestLastFM?term=\(term.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)&limit=10") else {return print("ERROR")}
 
         let urlRequest = URLRequest(url: url)
 

@@ -18,7 +18,7 @@ struct CardElementHookahBowl: View {
         ZStack{
             Button(action: {
                 if(connectElementsHookah.selectedBowl.id == elementHookah.id){
-                    connectElementsHookah.selectedBowl = ElementHookah(id: -1, image: "null", text: "null", typeObject: "null")
+                    connectElementsHookah.selectedBowl = ElementHookah(id: -1, price: 0, image: "null", text: "null", typeObject: "null")
                 } else {
                     connectElementsHookah.selectedBowl = elementHookah
                 }
@@ -34,6 +34,12 @@ struct CardElementHookahBowl: View {
            
            
             VStack{
+                HStack{
+                    Text("\(elementHookah.price.formatted()) ₽")
+                        .foregroundColor(.white)
+                    Spacer()
+                }.padding()
+                
                 Spacer()
                 HStack{
                     Text(elementHookah.text)
@@ -50,7 +56,7 @@ struct CardElementHookahBowl: View {
             if(connectElementsHookah.selectedBowl.id == elementHookah.id){
                 Button(action: {
                     if(connectElementsHookah.selectedBowl.id == elementHookah.id){
-                        connectElementsHookah.selectedBowl = ElementHookah(id: -1, image: "null", text: "null", typeObject: "null")
+                        connectElementsHookah.selectedBowl = ElementHookah(id: -1, price: 0, image: "null", text: "null", typeObject: "null")
                     } else {
                         connectElementsHookah.selectedBowl = elementHookah
                     }
@@ -72,6 +78,6 @@ struct CardElementHookahBowl: View {
 
 struct CardElementHookahBowl_Previews: PreviewProvider {
     static var previews: some View {
-        CardElementHookahBowl(elementHookah: ElementHookah(id: 0, image: "hookahStandart", text: "На чаше", typeObject: "standart"))
+        CardElementHookahBowl(elementHookah: ElementHookah(id: 0, price: 350, image: "hookahStandart", text: "На чаше", typeObject: "standart"))
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Product : Identifiable, Decodable {
+struct Product : Identifiable, Decodable, Encodable {
     var id : Int //= UUID().uuidString
     var title : String
     var imageUrl : String

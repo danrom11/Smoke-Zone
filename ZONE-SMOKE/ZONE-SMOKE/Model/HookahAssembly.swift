@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HookahAssembly : Identifiable, Decodable {
+struct HookahAssembly : Identifiable, Decodable, Encodable {
     var id : Int
     var title : String
     var hookah : [Hookah]

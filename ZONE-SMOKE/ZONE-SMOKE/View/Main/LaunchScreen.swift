@@ -47,7 +47,12 @@ struct LaunchScreen: View {
         }.onAppear(){
             NetworkModel.shared.getInfoUser(mail: CheckMail ?? "null")
             NetworkModel.shared.loadUserAvatar()
+            HookahAssemblyModel.shared.loadMyHookahAssembly()
+            
+            NetworkModel.shared.getFiltersTabacco()
             NetworkModel.shared.getProductTabacco()
+            
+            NetworkModel.shared.getFiltersFood()
             NetworkModel.shared.getProductFood()
         }
         
