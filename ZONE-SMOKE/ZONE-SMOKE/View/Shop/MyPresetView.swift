@@ -9,6 +9,10 @@ import SwiftUI
 
 struct MyPresetView: View {
 
+    @ObservedObject private var connectHookah = HookahAssemblyModel.shared
+    
+    
+    @State private var presetRootLink = false
     
     var body: some View {
        // NavigationView{
@@ -31,17 +35,40 @@ struct MyPresetView: View {
                     //TODO::LIST Preset
                     ScrollView(.vertical, showsIndicators: true, content: {
                         
+                        if(connectHookah.myHookahAssembly.count > 0){
+                            HStack{
+                                Text("Мои сборки")
+                                    .font(.system(size: 28))
+                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                                    .padding(.leading)
+                                
+                                Image(systemName: "heart.fill")
+                                    .font(.system(size: 28))
+                                    .foregroundColor(.red)
+                                
+                                Spacer()
+                            }
+                            
+                            ForEach(connectHookah.myHookahAssembly) {item in
+                                HookahAssemblyButton(hookahAssembly: item, openHookahAssembly: $presetRootLink)
+                                    .padding(.top, 5)
+                            }
+                        }
+                        
                         
                         
                         HStack{
-                            NavigationLink(destination: HookahTableView(), label: {
+                            NavigationLink(isActive: $presetRootLink, destination: { HookahTableView(presetRootLink: $presetRootLink) }, label: {
                                 Image(systemName: "plus.circle")
                                     .font(.system(size: 40, weight: .light))
                                     .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.cyan, .indigo]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                            }).isDetailLink(false)
+                            }).isDetailLink(false).simultaneousGesture(TapGesture().onEnded({
+                                connectHookah.hookahs.removeAll()
+                            }))
                             
                         }
                         .padding()
+                        .padding(.bottom, 90)
                     })
                     
                     

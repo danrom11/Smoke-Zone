@@ -8,10 +8,10 @@
 import Foundation
 import SwiftUI
 
-struct News : Identifiable {
-    var id = UUID().uuidString
-    var textNews : String
-    var textNewsColor : Color
-    var Image : String
-    var backColor : Color
+struct News : Identifiable, Decodable {
+    var id : Int
+    var title : String
+    var date : String
+    var image : String
+    var text : String
 }

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FoodView: View {
     @Environment(\.presentationMode) var presentationMode
+    
+    @Binding var activeRootLink : Bool
+    
     @ObservedObject var sh = CatalogViewModel.shared
     @State private var showFoods = false
 
@@ -76,46 +79,61 @@ struct FoodView: View {
             }
             
             
-            ButtonNextBuy()
-                .padding(.bottom, 10)
-//            if(sh.cartFood.count > 0){
-//                HStack
-//            }
+            
+            ZStack{
+                VStack{
+                    Spacer()
+                    HStack{
+                        NavigationLink(destination: {BuyView(activeRootLink: $activeRootLink)}, label: {
+                            Text("Дальше")
+                                .foregroundColor(.white)
+                                .font(.system(size: 30))
+                        }).isDetailLink(false)
+                    }
+                    .frame(width: 180, height: 80)
+                    .background(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(35)
+                    .padding()
+                }
+            }
+            //ButtonNextBuy()
+                //.padding(.bottom, 10)
 
         }.edgesIgnoringSafeArea(.bottom)
+            .navigationBarHidden(true)
     }
 }
 
 struct FoodView_Previews: PreviewProvider {
     static var previews: some View {
-        FoodView()
+        FoodView(activeRootLink: .constant(false))
     }
 }
 
-struct ButtonNextBuy : View{
-    @State private var showBuy = false
-    var body: some View{
-        ZStack{
-            VStack{
-                Spacer()
-                HStack{
-                    Button(action: {
-                        self.showBuy.toggle()
-                    }, label: {
-                        Text("Дальше")
-                            .foregroundColor(.white)
-                            .font(.system(size: 30))
-                    }).fullScreenCover(isPresented: $showBuy){
-                       // FoodView()
-                        BuyView()
-                    }
-                }
-                .frame(width: 180, height: 80)
-                .background(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(35)
-                .padding()
-            }
-        }
-    }
-}
+//struct ButtonNextBuy : View{
+//    @State private var showBuy = false
+//    var body: some View{
+//        ZStack{
+//            VStack{
+//                Spacer()
+//                HStack{
+//                    Button(action: {
+//                        self.showBuy.toggle()
+//                    }, label: {
+//                        Text("Дальше")
+//                            .foregroundColor(.white)
+//                            .font(.system(size: 30))
+//                    }).fullScreenCover(isPresented: $showBuy){
+//                       // FoodView()
+//                        //BuyView(activeRootLink: $activeRootLink)
+//                    }
+//                }
+//                .frame(width: 180, height: 80)
+//                .background(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .leading, endPoint: .trailing))
+//                .cornerRadius(35)
+//                .padding()
+//            }
+//        }
+//    }
+//}
 

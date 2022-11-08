@@ -10,32 +10,35 @@ import Foundation
 class FilterModel : ObservableObject{
     static let shared = FilterModel()
     
-    @Published var tabaccoFilters = [
-        Filter(title: "MustHave"),
-        Filter(title: "DarkSide (Core)"),
-        Filter(title: "BlackBurn"),
-        Filter(title: "Daily Hookah"),
-        Filter(title: "Satyr (Aroma Line)"),
-        Filter(title: "Chabacco (Medium)"),
-        Filter(title: "Element"),
-        Filter(title: "Smoke Angels"),
-        Filter(title: "Северный")
-    ]
+//    @Published var tabaccoFilters = [
+//        Filter(id: 1, title: "MustHave"),
+//        Filter(id: 2, title: "DarkSide (Core)"),
+//        Filter(id: 3, title: "BlackBurn"),
+//        Filter(id: 4, title: "Daily Hookah"),
+//        Filter(id: 5, title: "Satyr (Aroma Line)"),
+//        Filter(id: 6, title: "Chabacco (Medium)"),
+//        Filter(id: 7, title: "Element"),
+//        Filter(id: 8, title: "Smoke Angels"),
+//        Filter(id: 9, title: "Северный")
+//    ]
+//
+//    @Published var foodFilters = [
+//        Filter(id: 1, title: "Салаты"),
+//        Filter(id: 2, title: "Десерты"),
+//        Filter(id: 3, title: "Чай"),
+//        Filter(id: 4, title: "Кофе"),
+//        Filter(id: 5, title: "Снеки"),
+//        Filter(id: 6, title: "Соусы"),
+//        Filter(id: 7, title: "Напитки"),
+//        Filter(id: 8, title: "Б/А Напитки"),
+//        Filter(id: 9, title: "Ал. Напитки"),
+//        Filter(id: 10, title: "Коктейли"),
+//        Filter(id: 11, title: "Шоты"),
+//        Filter(id: 12, title: "Пиво")
+//    ]
     
-    @Published var foodFilters = [
-        Filter(title: "Салаты"),
-        Filter(title: "Десерты"),
-        Filter(title: "Чай"),
-        Filter(title: "Кофе"),
-        Filter(title: "Снеки"),
-        Filter(title: "Соусы"),
-        Filter(title: "Напитки"),
-        Filter(title: "Б/А Напитки"),
-        Filter(title: "Ал. Напитки"),
-        Filter(title: "Коктейли"),
-        Filter(title: "Шоты"),
-        Filter(title: "Пиво")
-    ]
+    @Published var tabaccoFilters = [Filter]()
+    @Published var foodFilters = [Filter]()
     
     @Published var userFilters = [Filter]()
     

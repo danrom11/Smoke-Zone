@@ -45,7 +45,7 @@ struct HookahTypeView: View {
                 
                 VStack{
                     HStack{
-                        Text("Чаша: \(connectElementsHookah.selectedBowl.id != -1 ? connectElementsHookah.selectedBowl.text : "")")
+                        Text("Чаша: \(connectElementsHookah.selectedBowl.id != -1 ? "\(connectElementsHookah.selectedBowl.text) - \(connectElementsHookah.selectedBowl.price) ₽" : "")")
                             .font(.system(size: 30))
                             .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .topTrailing))
                             .padding([.leading, .top])

@@ -15,6 +15,7 @@ struct ButtonReadyFilter : View{
                 Spacer()
                 HStack{
                     Button(action: {
+                        print("dismiss filter")
                         FilterModel.shared.userFilters.removeAll()
                         self.presentationMode.wrappedValue.dismiss()
                         

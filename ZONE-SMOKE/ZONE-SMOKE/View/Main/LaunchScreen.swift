@@ -12,7 +12,7 @@ struct LaunchScreen: View {
     @State private var size = 0.8
     @State private var opacity = 0.5
     
-    @State private var CheckMail = UserDefaults.standard.string(forKey: "userMail")
+    @State private var CheckProfile = UserDefaults.standard.string(forKey: "userProfile")
     
     
     var body: some View {
@@ -23,6 +23,8 @@ struct LaunchScreen: View {
                 BottomTabView()
             }else{
                 VStack{
+                    Spacer()
+                    
                     VStack{
                         Image("SplashIcon")
                             .resizable()
@@ -37,17 +39,32 @@ struct LaunchScreen: View {
                             self.opacity = 1.0
                         }
                     }
+                    
+                    Spacer()
+                    
+                    Text("МИНЗДРАВСОЦРАЗВИТИЯ ПРЕДУПРЕЖДАЕТ:\nКУРЕНИЕ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ.\nПРИЛОЖЕНИЕ ПРЕДНАЗНАЧЕНО ДЛЯ ЛИЦ СТАРШЕ 18 ЛЕТ")
+                        .font(.system(size: 12))
+                        .foregroundColor(.gray)
+                        .padding()
                 }
                 .onAppear(){
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0){
                         self.isActive = true
                     }
                 }
             }
         }.onAppear(){
-            NetworkModel.shared.getInfoUser(mail: CheckMail ?? "null")
+            NetworkModel.shared.getInfoUser(phone: CheckProfile ?? "null")
             NetworkModel.shared.loadUserAvatar()
+            HookahAssemblyModel.shared.loadMyHookahAssembly()
+            
+            NetworkModel.shared.getNews()
+            NetworkModel.shared.getPopulars()
+            
+            NetworkModel.shared.getFiltersTabacco()
             NetworkModel.shared.getProductTabacco()
+            
+            NetworkModel.shared.getFiltersFood()
             NetworkModel.shared.getProductFood()
         }
         

@@ -20,7 +20,7 @@ struct CardElementHookahFlask: View {
         ZStack{
             Button(action: {
                 if(connectElementsHookah.selectedFlask.id == elementHookah.id){
-                    connectElementsHookah.selectedFlask = ElementHookah(id: -1, image: "null", text: "null", typeObject: "null")
+                    connectElementsHookah.selectedFlask = ElementHookah(id: -1, price: 0, image: "null", text: "null", typeObject: "null")
                 } else {
                     connectElementsHookah.selectedFlask = elementHookah
                 }
@@ -51,7 +51,7 @@ struct CardElementHookahFlask: View {
             if(connectElementsHookah.selectedFlask.id == elementHookah.id){
                 Button(action: {
                     if(connectElementsHookah.selectedFlask.id == elementHookah.id){
-                        connectElementsHookah.selectedFlask = ElementHookah(id: -1, image: "null", text: "null", typeObject: "null")
+                        connectElementsHookah.selectedFlask = ElementHookah(id: -1, price: 0, image: "null", text: "null", typeObject: "null")
                     } else {
                         connectElementsHookah.selectedFlask = elementHookah
                     }
@@ -73,6 +73,6 @@ struct CardElementHookahFlask: View {
 
 struct CardElementHookahFlask_Previews: PreviewProvider {
     static var previews: some View {
-        CardElementHookahBowl(elementHookah: ElementHookah(id: 0, image: "InBotleWater", text: "На воде", typeObject: "water"))
+        CardElementHookahBowl(elementHookah: ElementHookah(id: 0, price: 0, image: "InBotleWater", text: "На воде", typeObject: "water"))
     }
 }

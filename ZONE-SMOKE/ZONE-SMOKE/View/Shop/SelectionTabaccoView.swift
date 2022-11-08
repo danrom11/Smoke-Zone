@@ -36,10 +36,10 @@ struct SelectionTabaccoView: View {
                 ScrollView(.vertical){
                     ForEach(CatalogViewModel.shared.productsTabacco){item in
                         if(filterSearch.count == 0 && connectFilter.userFilters.count == 0){
-                            ProductTobaccoAdd(product: item)
+                            ProductTobacco(product: item)
                                 .padding(.top, 5)
                         } else if (connectFilter.searchFilter(product: item, search: filterSearch)){
-                            ProductTobaccoAdd(product: item)
+                            ProductTobacco(product: item)
                                 .padding(.top, 5)
                         }
                     }

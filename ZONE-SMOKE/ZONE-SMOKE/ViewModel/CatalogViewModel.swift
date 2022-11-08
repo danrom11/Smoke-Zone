@@ -28,21 +28,14 @@ class CatalogViewModel : ObservableObject{
 //    ]
     
     @Published var productsTabacco = [Product]()
-    
     @Published var productsFood = [Product]()
     
     
     @Published var cartTabacco = [Product]()
-//        @Published var cartTabacco = [
-//            Product(id: 4343, title: "Салат цезарь", imageUrl: "salat", price: 300, descript: "Мой родной салатик", brand: "Салаты", taste: ["Курица", "Сыр", "Салат", "Чери", "Гренки"], strong: 300, count: 1)
-//
-//        ]
-//
     @Published var cartFood = [Product]()
-//    @Published var cartFood = [
-//        Product(title: "Салат цезарь", imageUrl: "salat", price: 300, descript: "Мой родной салатик", brand: "Салаты", taste: ["Курица", "Сыр", "Салат", "Чери", "Гренки"], strong: 300, count: 1)
-//
-//    ]
+    
+    @Published var hookahAssembly = HookahAssembly(id: -1, title: "null", hookah: [Hookah](arrayLiteral: Hookah(id: -1, title: "null", bowl: ElementHookah(id: -1, price: 0, image: "null", text: "null", typeObject: "null"), flask: ElementHookah(id: -1, price: 0, image: "null", text: "null", typeObject: "null"), tobacco: [Product](arrayLiteral: Product(id: -1, title: "null", imageUrl: "null", price: 0, descript: "null", brand: "null", taste: ["null"], strong: 0, count: 0)))))
+
     
     func serchIndex(product : Product, array : [Product]) -> Int{
         for item in 0..<array.count{
@@ -51,8 +44,9 @@ class CatalogViewModel : ObservableObject{
                 return item
             }
         }
-        print("ERROR!")
-        fatalError("Index not found in cart")
+        return -1;
+        //print("ERROR!")
+        //fatalError("Index not found in cart")
     }
     
     func checkProductInCartFood(product : Product) -> Int {

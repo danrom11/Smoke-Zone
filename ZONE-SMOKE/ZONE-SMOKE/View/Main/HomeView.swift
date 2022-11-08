@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @ObservedObject var connectHome = HomeModel.shared
+    
     var body: some View {
         
         ZStack{
@@ -27,15 +30,25 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal, showsIndicators: true, content: {
                             HStack{
-                                ForEach(HomeModel.shared.basePopular){popular in
+                                ForEach(connectHome.basePopular){popular in
                                     BlockPopular(popular: popular)
                                 }
                             }.padding(.bottom, 10).padding(.top, 160)
                         })
                         //vertical scroll menu
+                        HStack{
+                            Text("Новости")
+                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .leading, endPoint: .topTrailing))
+                                .font(.system(size: 35))
+                                .padding(.leading)
+                            Spacer()
+                        }
+                        
+                        
                         VStack{
-                            ForEach(HomeModel.shared.baseNews){news in
+                            ForEach(connectHome.baseNews){news in
                                 BlockNews(news: news)
+                                    .padding(.bottom, 40)
                             }
                             
                             HStack{
@@ -56,18 +69,17 @@ struct HomeView: View {
         }
        // .frame(maxWidth: .infinity, maxHeight: .infinity)
         
-        .background(Image("backSmoke")
-            .resizable()
-            .scaledToFill()
-            .blur(radius: 10, opaque: true))
+        .background(Color.black)
+        
+//        .background(Image("backSmoke")
+//            .resizable()
+//            .scaledToFill()
+//            .blur(radius: 10, opaque: true))
+        
         .edgesIgnoringSafeArea(.all)
         //.background(Color.black)//.edgesIgnoringSafeArea(.all)
     }
 }
-
-
-
-
 
 
 

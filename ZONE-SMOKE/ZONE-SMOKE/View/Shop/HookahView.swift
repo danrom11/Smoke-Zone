@@ -51,22 +51,17 @@ struct HookahView: View {
                             //.padding(.leading)
                     }
                 }
-        
-                List{
+                
+                
+                
+                
+                
+                ScrollView(.vertical, showsIndicators: false, content: {
                     ForEach(sh.cartTabacco){item in
-                        ProductTobaccoCart(product: item)
-                            .listRowSeparator(.hidden)
-                            .swipeActions(content: {
-                                Button(action: {
-                                    
-                                    sh.cartTabacco.remove(at: sh.serchIndex(product: item, array: sh.cartTabacco))
-                                    
-                                }, label: {
-                                    Label("Delete", systemImage: "trash.circle.fill")
-                                }).tint(.teal)
-                            })
-                            .listRowBackground(Color.clear)
+                        ProductTobacco(product: item)
+                            .padding(.top, 5)
                     }
+                    
                     HStack(){
                         Spacer()
                         Button(action: {
@@ -80,14 +75,48 @@ struct HookahView: View {
                         }
                         
                         Spacer()
-                    }   .listRowBackground(Color.clear) .listRowSeparator(.hidden)
-                    
+                    }
                     HStack{
                     }
                     .frame(height: 100)
-                    .listRowBackground(Color.clear) .listRowSeparator(.hidden)
-                    
-                }.listStyle(.plain)//.padding(.top, 40)
+                })
+        
+//                List{
+//                    ForEach(sh.cartTabacco){item in
+//                        ProductTobaccoCart(product: item)
+//                            .listRowSeparator(.hidden)
+//                            .swipeActions(content: {
+//                                Button(action: {
+//
+//                                    sh.cartTabacco.remove(at: sh.serchIndex(product: item, array: sh.cartTabacco))
+//
+//                                }, label: {
+//                                    Label("Delete", systemImage: "trash.circle.fill")
+//                                }).tint(.teal)
+//                            })
+//                            .listRowBackground(Color.clear)
+//                    }
+//                    HStack(){
+//                        Spacer()
+//                        Button(action: {
+//                            self.showTabacco.toggle()
+//                        }, label: {
+//                            Image(systemName: "plus.circle")
+//                                .font(.system(size: 40, weight: .light))
+//                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.cyan, .indigo]), startPoint: .topLeading, endPoint: .bottomTrailing))
+//                        }).fullScreenCover(isPresented: $showTabacco){
+//                            SelectionTabaccoView()
+//                        }
+//
+//                        Spacer()
+//                    }   .listRowBackground(Color.clear) .listRowSeparator(.hidden)
+//
+//                    HStack{
+//                    }
+//                    .frame(height: 100)
+//                    .listRowBackground(Color.clear) .listRowSeparator(.hidden)
+//
+//                }.listStyle(.plain)//.padding(.top, 40)
                 
             }
             

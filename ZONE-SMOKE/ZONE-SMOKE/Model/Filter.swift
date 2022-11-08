@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Filter : Identifiable {
-    var id = UUID().uuidString
+struct Filter : Identifiable, Decodable {
+    var id : Int
     var title : String
 }

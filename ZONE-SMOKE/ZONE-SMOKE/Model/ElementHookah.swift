@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct ElementHookah : Identifiable, Decodable {
+struct ElementHookah : Identifiable, Decodable, Encodable {
     var id : Int
+    var price : Decimal
     var image : String
     var text : String
     var typeObject : String

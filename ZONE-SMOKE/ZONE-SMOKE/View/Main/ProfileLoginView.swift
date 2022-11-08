@@ -15,7 +15,6 @@ struct ProfileLoginView: View {
     
     private var genCode = String(Int.random(in: 1000..<9999))
     
-    @State private var mail = ""
     @State private var phone = "+7"
     @State private var code = ""
     
@@ -52,15 +51,7 @@ struct ProfileLoginView: View {
                     Spacer()
                 }
                 Spacer()
-                TextField("Почта", text: $mail)
-                    .font(.system(size: 24, weight: .light, design: .monospaced))
-                    .foregroundColor(.white)
-                    .submitLabel(.send)
-                    .padding()
-                    .background(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(35)
-                    .padding(.horizontal)
-                    .disabled(showCodeTextField)
+
                 HStack{
                     iPhoneNumberField("", text: $phone)
                         .prefixHidden(false)
@@ -79,8 +70,8 @@ struct ProfileLoginView: View {
                 
                 if(showCodeTextField == false){
                     Button(action: {
-                        if(mail.count > 0 && mail.contains("@") && phone.count > 0){
-                            NetworkModel.shared.sendCode(mail: mail, code: genCode)
+                        if(phone.count > 0){
+                            NetworkModel.shared.sendCodeCall(phone: phone, code: genCode)
                             self.showCodeTextField = true
                         } else {
                             self.textNotification = "Заполните все поля"
@@ -110,8 +101,8 @@ struct ProfileLoginView: View {
                     
                     Button(action: {
                         if(code == genCode){
-                            NetworkModel.shared.Login(mail: mail, phone: phone)
-                            UserDefaults.standard.set(self.mail, forKey: "userMail")
+                            NetworkModel.shared.Login(phone: phone)
+                            UserDefaults.standard.set(self.phone, forKey: "userProfile")
                             self.presentationMode.wrappedValue.dismiss()
                         } else {
                             self.textNotification = "Неверный код"
@@ -124,6 +115,13 @@ struct ProfileLoginView: View {
                             .padding()
                             .overlay(RoundedRectangle(cornerRadius: 25).stroke(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .topLeading, endPoint: .trailing), lineWidth: 3))
                     }).padding(.top)
+                    
+                    if(showCodeTextField){
+                        Text("На указанный номер звонок, последние 4 цифры входящего номера и будут кодом подтверждения")
+                            .padding()
+                            .foregroundColor(.gray)
+                            .font(.system(size: 10))
+                    }
                 }
                 
                 

@@ -112,6 +112,7 @@ struct ProfileView: View {
                                 .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.teal, .indigo]), startPoint: .bottomLeading, endPoint: .trailing))
                         } else {
                             TextField("Имя", text: $connectUser.userProfile.userName)
+                                .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
                                 .onReceive(Just(connectUser.userProfile.userName)){ _ in limitText(12) }
                                 .font(.system(size: 25))
                                 .foregroundColor(.white)
@@ -124,7 +125,7 @@ struct ProfileView: View {
                                 if(editUserName == true){
                                     if(connectUser.userProfile.userName.count > 0){
                                         if(lastUserName != connectUser.userProfile.userName){
-                                            connectUser.SetUserName(mail: connectUser.userProfile.mail, userName: connectUser.userProfile.userName)
+                                            connectUser.SetUserName(phone: connectUser.userProfile.phone, userName: connectUser.userProfile.userName)
                                         }
                                     } else {
                                         self.textNotification = "Имя пользователя пустое"

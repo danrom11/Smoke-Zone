@@ -10,7 +10,10 @@ import SwiftUI
 struct MusicBlock: View {
     
     var music : Music
+    
     @ObservedObject var connectMusic = MusicModel.shared
+    
+    @Binding var showMusicSelected : Bool
     
     var body: some View {
         HStack{
@@ -33,9 +36,17 @@ struct MusicBlock: View {
                 Spacer()
             
             Button(action: {
+                
+                //Wtf BUG
+                ///a bug with an incomprehensible view update, and with any two assignments everything works
+                
+                connectMusic.musicSelected = Music(id: -1, name: "null", artist: "null")
+                
+                showMusicSelected = true
                 connectMusic.musicSelected = music
             }, label: {
-                Image(systemName: connectMusic.musicSelected.id != music.id ? "plus.circle" : "checkmark.circle")
+                                
+                Image(systemName: (music.id == connectMusic.musicSelected.id && music.name == connectMusic.musicSelected.name) ? "checkmark.circle" : "plus.circle")
                     .font(.system(size: 50, weight: .light))
                     .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.cyan, .indigo]), startPoint: .topLeading, endPoint: .bottomTrailing))
                     .padding(.trailing)
@@ -52,6 +63,6 @@ struct MusicBlock: View {
 
 struct MusicBlock_Previews: PreviewProvider {
     static var previews: some View {
-        MusicBlock(music: Music(id: 0, name: "Белый снег", artist: "Пилот"))
+        MusicBlock(music: Music(id: -1, name: "Белый снег", artist: "Пилот"), showMusicSelected: .constant(false))
     }
 }

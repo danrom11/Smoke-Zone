@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
+import UIKit
 import PopupView
-
-
-
-//let coloredNavAppearance = UINavigationBarAppearance()
 
 struct HookahTableView: View {
     
     @ObservedObject var sh = CatalogViewModel.shared
     @ObservedObject var connectHookah = HookahAssemblyModel.shared
+    
+    @Binding var presetRootLink : Bool
     
     @State private var activateRootLink = false
     @State private var IDReadyHookah = -1
@@ -24,6 +23,8 @@ struct HookahTableView: View {
     @State private var readyButton = false
     @State private var nameHookahTable = ""
     @State private var showHUDError = false
+    
+    @State private var saveHookahTable = false
     
     
     @Environment(\.presentationMode) var presentationMode
@@ -79,7 +80,7 @@ struct HookahTableView: View {
                 })
                 
                 
-
+                
                 
                 
                 Spacer()
@@ -87,8 +88,8 @@ struct HookahTableView: View {
             .onAppear(){
                 IDReadyHookah = -1
                 sh.cartTabacco = [Product]()
-                connectHookah.selectedBowl = ElementHookah(id: -1, image: "null", text: "null", typeObject: "null")
-                connectHookah.selectedFlask = ElementHookah(id: -1, image: "null", text: "null", typeObject: "null")
+                connectHookah.selectedBowl = ElementHookah(id: -1, price: 0, image: "null", text: "null", typeObject: "null")
+                connectHookah.selectedFlask = ElementHookah(id: -1, price: 0, image: "null", text: "null", typeObject: "null")
             }
             
             if(connectHookah.hookahs.count > 0 && readyButton == false){
@@ -122,39 +123,74 @@ struct HookahTableView: View {
             .popup(isPresented: $readyButton, type: .floater(verticalPadding: 0, useSafeAreaInset: true), closeOnTap: false){
                 ZStack{
                     HStack{
-                        VStack(alignment: .leading, spacing: 5){
-                            Text("Название:")
-                                .foregroundColor(.white)
-                                .font(.system(size: 20))
-                            TextField("", text: $nameHookahTable)
-                                .placeholder(when: nameHookahTable.isEmpty, placeholder: {
-                                    Text("Название сборки")
-                                        .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                        VStack(alignment: .leading, spacing: 3){
+                            Spacer()
+                            HStack{
+                                Text("Сохранить:")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: saveHookahTable == false ? 30 : 15))
+                                Button(action: {
+                                    saveHookahTable.toggle()
+                                }, label: {
+                                    Image(systemName: saveHookahTable == false ? "heart" : "heart.fill")
+                                        .font(.system(size: saveHookahTable == false ? 30 : 15))
+                                        .foregroundColor(.red)
                                 })
-                                .frame(width: 200, height: 40)
-                                .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
-                                .foregroundColor(.black)
-                                .background(Color.white)
-                                .cornerRadius(15)
+                            }
+                            
+                            
+                            if(saveHookahTable == true){
+                                Text("Название:")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 20))
+                                TextField("", text: $nameHookahTable)
+                                    .placeholder(when: nameHookahTable.isEmpty, placeholder: {
+                                        Text("Название сборки")
+                                            .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.indigo, .teal]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                                    })
+                                    .frame(width: 200, height: 40)
+                                    .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
+                                    .foregroundColor(.black)
+                                    .background(Color.white)
+                                    .cornerRadius(15)
+                            }
+                            
+                            
                             
                             Spacer()
                         }
                         Spacer()
                         VStack{
                             Spacer()
-                            Button(action: {
-                                if(nameHookahTable.count > 0){
-                                    presentationMode.wrappedValue.dismiss()
-                                } else {
-                                    self.showHUDError = true
-                                }
-                            }, label: {
+                            
+                            NavigationLink(destination: {
+                                FoodView(activeRootLink: $presetRootLink)
+                                
+                            }){
                                 Image(systemName: "checkmark.circle")
                                     .foregroundColor(.white)
                                     .font(.system(size: 50))
                                     .padding()
-                            })
-                            
+                                
+                            }
+                            .isDetailLink(false)
+                            .simultaneousGesture(TapGesture().onEnded({
+                                
+                                
+                                
+                                sh.hookahAssembly = HookahAssembly(id: connectHookah.myHookahAssembly.count, title: saveHookahTable == true ? nameHookahTable.count > 0 ? nameHookahTable : "Моя сборка \(connectHookah.myHookahAssembly.count + 1)" : "Быстрый заказ", hookah: connectHookah.hookahs)
+                                
+                                if(saveHookahTable == true){
+                                    connectHookah.myHookahAssembly.append(HookahAssembly(id: connectHookah.myHookahAssembly.count, title: nameHookahTable.count > 0 ? nameHookahTable : "Моя сборка \(connectHookah.myHookahAssembly.count + 1)", hookah: connectHookah.hookahs))
+                                    UserDefaults.standard.set(try? PropertyListEncoder().encode(connectHookah.myHookahAssembly), forKey: "myHookahAssembly")
+                                }
+                                
+                                nameHookahTable = ""
+                                saveHookahTable = false
+                                //add test bug
+                                //readyButton = false
+                                hideKeyboard()
+                            }))
                             Spacer()
                         }
                     }.padding()
@@ -188,6 +224,14 @@ struct HookahTableView: View {
 
 struct HookahTableView_Previews: PreviewProvider {
     static var previews: some View {
-        HookahTableView()
+        HookahTableView(presetRootLink: .constant(false))
     }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif

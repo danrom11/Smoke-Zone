@@ -17,7 +17,7 @@ struct BottomTabView: View {
                     HomeView().tag(0)
                     MyPresetView().tag(1)
                     MusicView().tag(2)
-                        
+                    BookingOnlyView().tag(3)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 
@@ -75,11 +75,11 @@ struct BottomTabView: View {
                         Spacer()
                         VStack(alignment: .center){
                             Button(action: {self.tabSelected = 3}, label: {
-                                Image(systemName: "gearshape")
+                                Image(systemName: "calendar.badge.plus")
                                     .foregroundColor(self.tabSelected == 3 ? .mint : .white)
                                     .font(.system(size: 20))
                             })
-                            Text("Настойки")
+                            Text("Бронь")
                                 .foregroundColor(self.tabSelected == 3 ? .mint : .white)
                                 .minimumScaleFactor(0.6)
                         }.frame(width: 50, height: 50)

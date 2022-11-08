@@ -8,10 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct Popular : Identifiable {
-    var id = UUID().uuidString
+struct Popular : Identifiable, Decodable {
+    var id : Int
     var text : String
-    var textColor : Color
-    var backColor : Color
     var image : String
 }
